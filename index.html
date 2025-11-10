@@ -50,11 +50,279 @@
     }
     </script>
 
-    <!-- Tailwind Play CDN (fast dev; removes need for build-time Tailwind while you iterate) -->
+    <!-- Tailwind Play CDN (no build step required) -->
     <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <!-- Font Awesome (professional icon set) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <!-- GSAP + ScrollToPlugin (used for smooth scrolling and entrance animations) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollToPlugin.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+    <link rel="stylesheet" href="/styles.css">
   </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
+  <body class="antialiased text-gray-900">
+    <!-- Skip link for keyboard users -->
+    <a href="#home" class="skip-link sr-only focus:not-sr-only absolute left-4 top-4 z-50 bg-white text-blue-900 px-3 py-2 rounded-md shadow-sm">Skip to content</a>
+    <!-- Header -->
+    <header id="site-header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-16 lg:h-20 py-2">
+          <div class="flex items-center space-x-4">
+            <a href="#home" class="flex items-center space-x-3" aria-label="TTM — Home">
+              <i class="fa-solid fa-truck fa-2x text-white" id="brand-icon" aria-hidden="true"></i>
+              <span id="brand" class="text-xl lg:text-2xl font-extrabold tracking-tight text-white">TTM</span>
+            </a>
+            <span class="hidden lg:inline-block text-sm text-blue-100">Fleet Management • Real-time Insights</span>
+          </div>
+
+          <div id="desktop-nav" class="hidden md:flex items-center space-x-6">
+            <button data-scroll="home" class="nav-link text-white hover:text-white/90 transition">Home</button>
+            <button data-scroll="features" class="nav-link text-white hover:text-white/90 transition">Features</button>
+            <button data-scroll="benefits" class="nav-link text-white hover:text-white/90 transition">Solutions</button>
+            <button data-scroll="contact" class="nav-link text-white hover:text-white/90 transition">Contact</button>
+            <button data-scroll="contact" class="ml-2 inline-flex items-center rounded-full cta-btn bg-gradient-to-r from-blue-500 to-indigo-600 text-white px-5 py-2 shadow-lg hover:opacity-95 transition">Request Demo <i class="fa-solid fa-arrow-right ml-2"></i></button>
+          </div>
+
+          <div class="flex items-center space-x-2">
+            <button id="mobile-toggle" class="md:hidden text-white p-2 rounded-md hover:bg-white/10" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobile-menu">
+              <i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div id="mobile-menu" class="md:hidden bg-white border-t hidden" role="menu" aria-labelledby="mobile-toggle">
+        <div class="px-4 py-4 space-y-3">
+          <button data-scroll="home" role="menuitem" class="block w-full text-left py-2 hover:text-blue-600">Home</button>
+          <button data-scroll="features" role="menuitem" class="block w-full text-left py-2 hover:text-blue-600">Features</button>
+          <button data-scroll="benefits" role="menuitem" class="block w-full text-left py-2 hover:text-blue-600">Solutions</button>
+          <button data-scroll="contact" role="menuitem" class="block w-full text-left py-2 hover:text-blue-600">Contact</button>
+          <button data-scroll="contact" role="menuitem" class="w-full bg-blue-600 text-white px-6 py-2 rounded-full hover:bg-blue-700">Request Demo</button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Hero -->
+    <main>
+      <section id="home" class="relative pt-16 lg:pt-20 min-h-screen flex items-center bg-gradient-to-br from-blue-900 via-blue-800 to-indigo-900 overflow-hidden">
+        <div class="absolute inset-0 opacity-10">
+          <div class="absolute top-20 left-10 w-72 h-72 bg-blue-400 rounded-full blur-3xl animate-pulse"></div>
+          <div class="absolute bottom-20 right-10 w-96 h-96 bg-indigo-400 rounded-full blur-3xl animate-pulse" style="animation-delay:1s"></div>
+        </div>
+
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-20 relative z-10">
+          <div class="max-w-4xl mx-auto text-center">
+            <h1 id="hero-title" class="text-4xl sm:text-5xl lg:text-6xl font-bold text-black mb-10 leading-tight">Smarter, Safer, Data-Driven Fleet Management</h1>
+            <p id="hero-sub" class="text-lg sm:text-xl text-black mb-8 max-w-2xl mx-auto">TTM connects your fleet, drivers, and data in real time — for seamless, compliant, and efficient operations.</p>
+
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+              <button data-scroll="contact" id="cta-demo" class="bg-white text-blue-900 px-8 py-4 rounded-full font-semibold hover:bg-blue-50 inline-flex items-center">
+                Request Demo
+                <i class="fa-solid fa-chevron-right ml-2"></i>
+              </button>
+
+              <button data-scroll="features" id="cta-learn" class="border-2 border-white text-white px-8 py-4 rounded-full font-semibold hover:bg-white hover:text-blue-900 transition-all">Learn More</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Features -->
+      <section id="features" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="text-center mb-16">
+            <h2 class="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">Powerful Features for Modern Fleets</h2>
+            <p class="text-lg text-gray-600 max-w-2xl mx-auto">Comprehensive tools designed to optimize every aspect of your fleet operations</p>
+          </div>
+
+          <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8" id="features-grid">
+            <div class="feature-card bg-white p-8 rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
+              <div class="bg-blue-100 w-16 h-16 rounded-xl flex items-center justify-center mb-6 text-blue-600">
+                <i class="fa-solid fa-map-pin fa-lg"></i>
+              </div>
+              <h3 class="text-xl font-semibold mb-3 text-gray-900">Real-Time GPS Tracking</h3>
+              <p class="text-gray-600 leading-relaxed">Monitor your entire fleet with live location updates, geofencing, and route visualization for complete operational visibility.</p>
+            </div>
+
+            <div class="feature-card bg-white p-8 rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
+                <div class="bg-blue-100 w-16 h-16 rounded-xl flex items-center justify-center mb-6 text-blue-600">
+                <i class="fa-solid fa-file-lines fa-lg"></i>
+              </div>
+              <h3 class="text-xl font-semibold mb-3 text-gray-900">ELD & Compliance Automation</h3>
+              <p class="text-gray-600 leading-relaxed">Stay compliant with automated FMCSA reporting, HOS tracking, and DVIR management that eliminates paperwork and reduces violations.</p>
+            </div>
+
+            <div class="feature-card bg-white p-8 rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
+                <div class="bg-blue-100 w-16 h-16 rounded-xl flex items-center justify-center mb-6 text-blue-600">
+                <i class="fa-solid fa-chart-simple fa-lg"></i>
+              </div>
+              <h3 class="text-xl font-semibold mb-3 text-gray-900">Driver Performance Analytics</h3>
+              <p class="text-gray-600 leading-relaxed">Track driver behavior, safety scores, and performance metrics to improve safety culture and reduce accident risk.</p>
+            </div>
+
+            <div class="feature-card bg-white p-8 rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
+                <div class="bg-blue-100 w-16 h-16 rounded-xl flex items-center justify-center mb-6 text-blue-600">
+                <i class="fa-solid fa-chart-line fa-lg"></i>
+              </div>
+              <h3 class="text-xl font-semibold mb-3 text-gray-900">Route Optimization & Fuel Insights</h3>
+              <p class="text-gray-600 leading-relaxed">Reduce fuel costs and improve efficiency with AI-powered route planning and real-time fuel consumption analytics.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Benefits -->
+      <section id="benefits" class="py-20 bg-white">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="text-center mb-16">
+            <h2 class="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">Why Leading Fleets Choose TTM</h2>
+            <p class="text-lg text-gray-600 max-w-2xl mx-auto">Trusted by hundreds of fleets across North America for reliability and results</p>
+          </div>
+
+          <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-5xl mx-auto">
+            <div class="text-center p-6">
+                <div class="bg-gradient-to-br from-blue-600 to-indigo-600 w-20 h-20 rounded-full flex items-center justify-center mb-4 mx-auto">
+                <i class="fa-solid fa-clock fa-lg text-white"></i>
+              </div>
+              <div class="text-4xl font-bold text-gray-900 mb-2"><span data-counter data-target="99.9">0.0</span>%</div>
+              <div class="text-gray-600 font-medium">Uptime Guarantee</div>
+            </div>
+
+            <div class="text-center p-6">
+                <div class="bg-gradient-to-br from-green-600 to-emerald-600 w-20 h-20 rounded-full flex items-center justify-center mb-4 mx-auto">
+                <i class="fa-solid fa-shield-halved fa-lg text-white"></i>
+              </div>
+              <div class="text-4xl font-bold text-gray-900 mb-2">24/7</div>
+              <div class="text-gray-600 font-medium">Expert Support</div>
+            </div>
+
+            <div class="text-center p-6">
+                <div class="bg-gradient-to-br from-purple-600 to-pink-600 w-20 h-20 rounded-full flex items-center justify-center mb-4 mx-auto">
+                <i class="fa-solid fa-dollar-sign fa-lg text-white"></i>
+              </div>
+              <div class="text-4xl font-bold text-gray-900 mb-2"><span data-counter data-target="25">0</span>%</div>
+              <div class="text-gray-600 font-medium">Lower Costs</div>
+            </div>
+
+            <div class="text-center p-6">
+                <div class="bg-gradient-to-br from-orange-600 to-red-600 w-20 h-20 rounded-full flex items-center justify-center mb-4 mx-auto">
+                <i class="fa-solid fa-users fa-lg text-white"></i>
+              </div>
+              <div class="text-4xl font-bold text-gray-900 mb-2"><span data-counter data-target="500">0</span>+</div>
+              <div class="text-gray-600 font-medium">Trusted Fleets</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Contact -->
+      <section id="contact" class="py-20 bg-gradient-to-br from-gray-50 to-blue-50">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="max-w-3xl mx-auto">
+            <div class="text-center mb-12">
+              <h2 class="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">Request a Demo</h2>
+              <p class="text-lg text-gray-600">See how TTM can transform your fleet operations. Fill out the form and our team will contact you within 24 hours.</p>
+            </div>
+
+            <div class="bg-white p-8 lg:p-12 rounded-2xl shadow-lg">
+              <form id="contact-form">
+                <div class="grid md:grid-cols-2 gap-6 mb-6">
+                  <div>
+                    <label for="name" class="block text-sm font-medium text-gray-700 mb-2">Full Name *</label>
+                    <input type="text" id="name" name="name" required placeholder="John Doe" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent outline-none transition" />
+                  </div>
+
+                  <div>
+                    <label for="email" class="block text-sm font-medium text-gray-700 mb-2">Email Address *</label>
+                    <input type="email" id="email" name="email" required placeholder="john@company.com" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent outline-none transition" />
+                  </div>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-6 mb-6">
+                  <div>
+                    <label for="company" class="block text-sm font-medium text-gray-700 mb-2">Company Name *</label>
+                    <input type="text" id="company" name="company" required placeholder="Your Company" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent outline-none transition" />
+                  </div>
+
+                  <div>
+                    <label for="fleetSize" class="block text-sm font-medium text-gray-700 mb-2">Fleet Size *</label>
+                    <select id="fleetSize" name="fleetSize" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent outline-none transition">
+                      <option value="">Select fleet size</option>
+                      <option value="1-10">1-10 vehicles</option>
+                      <option value="11-50">11-50 vehicles</option>
+                      <option value="51-100">51-100 vehicles</option>
+                      <option value="100+">100+ vehicles</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="mb-6">
+                  <label for="message" class="block text-sm font-medium text-gray-700 mb-2">Message</label>
+                  <textarea id="message" name="message" rows="4" placeholder="Tell us about your fleet management needs..." class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent outline-none transition resize-none"></textarea>
+                </div>
+
+                <div id="form-status" class="mb-6 hidden p-4 rounded-lg"></div>
+
+                <button type="submit" class="w-full bg-blue-600 text-white px-8 py-4 rounded-lg font-semibold hover:bg-blue-700 transition-colors transform hover:scale-[1.02] active:scale-[0.98]">Submit Request</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Footer -->
+      <footer class="bg-gray-900 text-gray-300 py-12">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="grid md:grid-cols-3 gap-8 mb-8">
+            <div>
+              <div class="flex items-center space-x-2 mb-4">
+                <i data-lucide="truck" class="w-8 h-8 text-blue-500"></i>
+                <span class="text-xl font-bold text-white">TTM</span>
+              </div>
+              <p class="text-gray-400 mb-4">Total Transport Management - Connecting fleets with intelligent technology.</p>
+              <p class="text-sm text-gray-500">Oak Hills, CA, USA</p>
+            </div>
+
+            <div>
+              <h3 class="text-white font-semibold mb-4">Quick Links</h3>
+              <ul class="space-y-2">
+                <li><button data-scroll="features" class="hover:text-blue-400 transition-colors">Features</button></li>
+                <li><button data-scroll="benefits" class="hover:text-blue-400 transition-colors">Solutions</button></li>
+                <li><a href="#privacy" class="hover:text-blue-400 transition-colors">Privacy Policy</a></li>
+                <li><a href="#terms" class="hover:text-blue-400 transition-colors">Terms of Service</a></li>
+              </ul>
+            </div>
+
+            <div>
+              <h3 class="text-white font-semibold mb-4">Contact</h3>
+              <ul class="space-y-3">
+                <li class="flex items-center space-x-2">
+                  <i data-lucide="mail" class="w-5 h-5 text-blue-500"></i>
+                  <a href="mailto:support@ttmkonnect.com" class="hover:text-blue-400 transition-colors">support@ttmkonnect.com</a>
+                </li>
+                <li class="flex items-center space-x-2">
+                  <i data-lucide="phone" class="w-5 h-5 text-blue-500"></i>
+                  <span>24/7 Support Available</span>
+                </li>
+              </ul>
+              <div class="flex space-x-4 mt-4">
+                <a href="#linkedin" class="hover:text-blue-400 transition-colors" aria-label="LinkedIn"><i class="fa-brands fa-linkedin fa-lg"></i></a>
+                <a href="#twitter" class="hover:text-blue-400 transition-colors" aria-label="Twitter"><i class="fa-brands fa-twitter fa-lg"></i></a>
+              </div>
+            </div>
+          </div>
+
+          <div class="border-t border-gray-800 pt-8 text-center text-sm text-gray-500">
+            <p>&copy; 2025 TTM (Total Transport Management). All rights reserved.</p>
+          </div>
+        </div>
+      </footer>
+    </main>
+
+  <script src="app.js"></script>
+    <script>document.addEventListener('DOMContentLoaded', ()=>{ if(window.gsap && window.ScrollTrigger) { gsap.registerPlugin(ScrollToPlugin, ScrollTrigger); } });</script>
   </body>
 </html>
